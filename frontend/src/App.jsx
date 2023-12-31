@@ -35,9 +35,11 @@ function App() {
       if (e.matches) {
         body.classList.add("dark");
         setIsDark(true);
+        localStorage.setItem("darkMode", "true");
       } else {
         body.classList.remove("dark");
         setIsDark(false);
+        localStorage.setItem("darkMode", "false");
       }
     }
 
@@ -62,7 +64,10 @@ function App() {
   return (
     <ConfigProvider
       theme={{
-        algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        algorithm:
+          localStorage.getItem("darkMode") === "true"
+            ? theme.darkAlgorithm
+            : theme.defaultAlgorithm,
       }}
     >
       <Spin spinning={spining}>

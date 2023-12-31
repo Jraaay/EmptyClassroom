@@ -11,6 +11,37 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        function setClassOnDocumentBody(darkMode) {
+          if (darkMode) {
+            document.body.classList.add("dark");
+          } else {
+            document.body.classList.remove("dark");
+          }
+        }
+        var preferDarkQuery = "(prefers-color-scheme: dark)";
+        var mql = window.matchMedia(preferDarkQuery);
+        var supportsColorSchemeQuery = mql.media === preferDarkQuery;
+        var localStorageTheme = null;
+        try {
+          localStorageTheme = localStorage.getItem("darkMode");
+        } catch (err) {}
+        var localStorageExists = localStorageTheme !== null;
+        if (localStorageExists) {
+          localStorageTheme = JSON.parse(localStorageTheme);
+        }
+        if (localStorageExists) {
+          setClassOnDocumentBody(localStorageTheme);
+        } else if (supportsColorSchemeQuery) {
+          setClassOnDocumentBody(mql.matches);
+          localStorage.setItem("darkMode", mql.matches);
+        } else {
+          var isDarkMode = document.body.classList.contains("dark");
+          localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
     <script
       async
