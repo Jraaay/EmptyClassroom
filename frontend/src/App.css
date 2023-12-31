@@ -1,0 +1,12 @@
+.App {
+    text-align: -webkit-center;
+    height: 100%;
+}
+
+.logo {
+    width: 7em;
+    margin: 0 auto;
+    display: block;
+    margin-top: -2em;
+    margin-bottom: -2em;
+}
