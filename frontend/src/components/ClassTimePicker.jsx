@@ -63,12 +63,20 @@ function ClassTimePicker(props) {
     "20:10",
   ];
 
+  function fillZero(x) {
+    if (x < 10) {
+      return "0" + x;
+    }
+    return x;
+  }
+
   const options = [];
   const now = new Date();
-  const now_hour = now.getHours();
-  const now_minute = now.getMinutes();
+  const now_hour = fillZero(now.getHours());
+  const now_minute = fillZero(now.getMinutes());
 
   for (let i = 0; i <= 13; i++) {
+    console.log(class_time[i], `${now_hour}:${now_minute}`);
     options.push({
       label: classes[i],
       value: i,
