@@ -168,7 +168,11 @@ function ClassTimePicker(props) {
               margin: "2px",
               height: props.showClassTime ? "45px" : "30px",
               padding: "0px",
-              color: x.disabled ? "#00000073" : null,
+              color: x.disabled
+                ? props.isDark
+                  ? "#ffffff73"
+                  : "#00000073"
+                : null,
             }}
             disabled={x.disabled}
           >
@@ -223,6 +227,7 @@ ClassTimePicker.propTypes = {
   selectedDate: PropTypes.object,
   showClassTime: PropTypes.bool,
   canSelectAllDay: PropTypes.bool,
+  isDark: PropTypes.bool,
 };
 
 export default ClassTimePicker;

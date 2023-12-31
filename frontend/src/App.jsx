@@ -23,7 +23,6 @@ function App() {
   const [selectedClassTimes, setSelectedClassTimes] = useState([]);
   const [showClassTime, setShowClassTime] = useState(false);
   const [canSelectAllDay, setCanSelectAllDay] = useState(false);
-
   const [isDark, setIsDark] = useState(false);
 
   const { Title } = Typography;
@@ -107,6 +106,7 @@ function App() {
             selectedDate={selectedDate}
             showClassTime={showClassTime}
             canSelectAllDay={canSelectAllDay}
+            isDark={isDark}
           />
           <EmptyClassroomTable
             todayData={resp}
