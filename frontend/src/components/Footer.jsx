@@ -5,7 +5,7 @@ function Footer() {
   const { Text } = Typography;
   return (
     <Text>
-      © 2022-2023 Jray
+      © 2022-2024 Jray
       <Button
         onClick={() => window.open("https://github.com/Jraaay/EmptyClassroom")}
         type="text"
