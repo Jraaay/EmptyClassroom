@@ -4,7 +4,6 @@ import { Typography, Spin, ConfigProvider, theme } from "antd";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import Notification from "./components/Notification";
-import CachedFetch from "./utils/cache_get";
 import CampusButtonGroup from "./components/CampusButtonGroup";
 import DatePicker from "./components/DatePicker";
 import BuildingPicker from "./components/BuildingPicker";
@@ -46,7 +45,7 @@ function App() {
     mql.addEventListener("change", matchMode);
 
     matchMode(mql);
-    CachedFetch("/api/get_data")
+    fetch("/api/get_data")
       .then((resp) => resp.json())
       .then((resp) => {
         setResp(resp);

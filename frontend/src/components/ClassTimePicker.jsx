@@ -76,7 +76,6 @@ function ClassTimePicker(props) {
   const now_minute = fillZero(now.getMinutes());
 
   for (let i = 0; i <= 13; i++) {
-    console.log(class_time[i], `${now_hour}:${now_minute}`);
     options.push({
       label: classes[i],
       value: i,
