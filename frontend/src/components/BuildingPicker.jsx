@@ -1,11 +1,9 @@
 import PropTypes from "prop-types";
 import { Button, Card } from "antd";
-import { useState } from "react";
 import "./BuildingPicker.css";
 
 function BuildingPicker(props) {
   // const [style, setStyle] = useState(true);
-  const [checkedList, setCheckedList] = useState([]);
   if (props.todayData.code != 0) {
     return null;
   }
@@ -46,16 +44,16 @@ function BuildingPicker(props) {
     >
       {options.map((item) => (
         <Button
-          key={item.value}
-          type={checkedList.includes(item.value) ? "primary" : "outline"}
+          key={props.selectedCampus + item.value}
+          type={
+            props.selectedBuildings.includes(item.value) ? "primary" : "outline"
+          }
           onClick={() => {
-            if (checkedList.includes(item.value)) {
-              setCheckedList(checkedList.filter((x) => x != item.value));
+            if (props.selectedBuildings.includes(item.value)) {
               props.setSelectedBuildings(
                 props.selectedBuildings.filter((x) => x != item.value)
               );
             } else {
-              setCheckedList([...checkedList, item.value]);
               props.setSelectedBuildings([
                 ...props.selectedBuildings,
                 item.value,

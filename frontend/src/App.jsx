@@ -11,6 +11,7 @@ import ClassTimePicker from "./components/ClassTimePicker";
 import EmptyClassroomTable from "./components/EmptyClassroomTable";
 import GlobalEmpty from "./components/GlobalEmpty";
 import Footer from "./components/Footer";
+import ClassTableWarn from "./components/ClassTableWarn";
 
 function App() {
   const [spining, setSpining] = useState(true);
@@ -22,6 +23,8 @@ function App() {
   const [selectedClassTimes, setSelectedClassTimes] = useState([]);
   const [showClassTime, setShowClassTime] = useState(false);
   const [canSelectAllDay, setCanSelectAllDay] = useState(false);
+  const [useClassTable, setUseClassTable] = useState(false);
+  const [dontWarnClassTable, setDontWarnClassTable] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
   const { Title } = Typography;
@@ -58,6 +61,10 @@ function App() {
       });
     setShowClassTime(localStorage.getItem("showClassTime") !== "false");
     setCanSelectAllDay(localStorage.getItem("canSelectAllDay") === "true");
+    setUseClassTable(localStorage.getItem("useClassTable") === "true");
+    setDontWarnClassTable(
+      localStorage.getItem("dontWarnClassTable") === "true"
+    );
   }, []);
 
   return (
@@ -90,6 +97,8 @@ function App() {
             setShowClassTime={setShowClassTime}
             canSelectAllDay={canSelectAllDay}
             setCanSelectAllDay={setCanSelectAllDay}
+            useClassTable={useClassTable}
+            setUseClassTable={setUseClassTable}
           />
           <DatePicker
             todayData={resp}
@@ -112,6 +121,14 @@ function App() {
             canSelectAllDay={canSelectAllDay}
             isDark={isDark}
           />
+          <ClassTableWarn
+            todayData={resp}
+            selectedDate={selectedDate}
+            selectedCampus={selectedCampus}
+            useClassTable={useClassTable}
+            dontWarnClassTable={dontWarnClassTable}
+            setDontWarnClassTable={setDontWarnClassTable}
+          />
           <EmptyClassroomTable
             todayData={resp}
             selectedDate={selectedDate}
@@ -119,6 +136,7 @@ function App() {
             selectedBuildings={selectedBuildings}
             selectedClassTimes={selectedClassTimes}
             setIsError={setIsError}
+            useClassTable={useClassTable}
           />
           <GlobalEmpty todayData={resp} isError={isError} />
           <Footer />
