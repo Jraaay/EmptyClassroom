@@ -106,7 +106,8 @@ func QueryOne(ctx context.Context, id int) ([]model.JWClassInfo, error) {
 
 func QueryAll(ctx context.Context) (classInfo *model.ClassInfo, err error) {
 	classInfo = &model.ClassInfo{
-		UpdateAt: time.Now(),
+		UpdateAt:   time.Now(),
+		IsFallback: map[string]bool{},
 	}
 	sysConfig := config.GetConfig()
 	for _, campus := range sysConfig.Campus {
@@ -126,6 +127,7 @@ func QueryAll(ctx context.Context) (classInfo *model.ClassInfo, err error) {
 			}
 			if err != nil {
 				logs.CtxError(ctx, "query failed: %v", err)
+				classInfo.IsFallback[campus.Name] = true
 			}
 			if err == nil && errorTime > 0 {
 				logs.CtxWarn(ctx, "query retry success, error time: %v", errorTime)

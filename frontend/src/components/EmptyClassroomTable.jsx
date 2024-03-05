@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 import { Empty, Card, Table, Button, Tag, Modal, Descriptions } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./EmptyClassroomTable.css";
 import CalculateEmptyClassroom from "../utils/calculte";
+import dayjs from "dayjs";
 
 function EmptyClassroomTable(props) {
+  console.log(props.selectedBuildings);
   const [emptyClassroom, setEmptyClassroom] = useState([]);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState([]);
@@ -205,7 +208,21 @@ function EmptyClassroomTable(props) {
       align: "center",
     },
     {
-      title: "来源",
+      title: (
+        <>
+          来源
+          <Button
+            size="small"
+            type="text"
+            icon={<QuestionCircleOutlined />}
+            onClick={() => {
+              window.open(
+                "https://jraaaaay.feishu.cn/docx/HAu9dbYF1oRb4nxFd7RcugMTnHj#part-Bwf5dnkr0o3G6ExcedZcLzaSnBe"
+              );
+            }}
+          />
+        </>
+      ),
       key: "can_trust",
       dataIndex: "can_trust",
       align: "center",
@@ -236,7 +253,15 @@ function EmptyClassroomTable(props) {
         }}
       >
         <Table
-          dataSource={emptyClassroom}
+          dataSource={
+            !props.useClassTable &&
+            !(props.selectedCampus == "海南") &&
+            props.selectedDate.isSame(dayjs(), "day") &&
+            (props.todayData.data.is_fallback == undefined ||
+              !props.todayData.data.is_fallback[props.selectedCampus])
+              ? emptyClassroom.filter((item) => item.can_trust)
+              : emptyClassroom
+          }
           columns={columns}
           pagination={false}
           bordered={false}
@@ -279,6 +304,7 @@ EmptyClassroomTable.propTypes = {
   selectedBuildings: PropTypes.array,
   selectedClassTimes: PropTypes.array,
   setIsError: PropTypes.func,
+  useClassTable: PropTypes.bool,
 };
 
 export default EmptyClassroomTable;

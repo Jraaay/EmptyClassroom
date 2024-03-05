@@ -60,4 +60,5 @@ type ClassInfo struct {
 	ClassTable    *config.ClassTableConfig   `json:"class_table"`
 	UpdateAt      time.Time                  `json:"update_at"`
 	Notification  *config.NotificationConfig `json:"notification"`
+	IsFallback    map[string]bool            `json:"is_fallback"`
 }

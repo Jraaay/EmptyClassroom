@@ -145,7 +145,19 @@ function CampusButtonGroup(props) {
         cancelText="取消"
       >
         <div>
-          请在下方输入您的反馈，建议附上邮箱以便回复。
+          在反馈咨询前请先看看这个问答：
+          <Button
+            size="small"
+            onClick={() => {
+              window.open(
+                "https://jraaaaay.feishu.cn/docx/HAu9dbYF1oRb4nxFd7RcugMTnHj"
+              );
+            }}
+          >
+            空教室查询Q&A
+          </Button>
+          <Divider />
+          如果没能解决你的问题，请在下方输入您的反馈，建议附上联系方式以便回复。
           <Input.TextArea
             rows={3}
             style={{
@@ -193,6 +205,19 @@ function CampusButtonGroup(props) {
               全选时选全天
             </Typography.Title>
           </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Switch
+              defaultChecked={props.useClassTable}
+              onChange={(v) => {
+                localStorage.setItem("useClassTable", v ? "true" : "false");
+                props.setUseClassTable(v);
+              }}
+              size="small"
+            />
+            <Typography.Title level={5} style={{ margin: 8 }}>
+              非必要情况下也使用课表数据
+            </Typography.Title>
+          </div>
           <Divider plain>
             <HeartFilled />
           </Divider>
@@ -201,28 +226,34 @@ function CampusButtonGroup(props) {
               lineHeight: "2em",
             }}
           >
-            数据来源：微教务的空教室查询、本科生&研究生课表，如有更好的数据来源，欢迎反馈
+            数据来源：
+            <Button
+              size="small"
+              onClick={() => {
+                window.open(
+                  "https://jraaaaay.feishu.cn/docx/HAu9dbYF1oRb4nxFd7RcugMTnHj#part-Zip8dx2rlobE5hxW00CcHwOOnre"
+                );
+              }}
+            >
+              了解更多
+            </Button>
           </div>
           <div
             style={{
               lineHeight: "2em",
             }}
           >
-            当天的数据来自：课表+教务
-          </div>
-          <div
-            style={{
-              lineHeight: "2em",
-            }}
-          >
-            其他日期的数据来自：课表
-          </div>
-          <div
-            style={{
-              lineHeight: "2em",
-            }}
-          >
-            一般情况下，请以教务为准
+            问答Q&A：
+            <Button
+              size="small"
+              onClick={() => {
+                window.open(
+                  "https://jraaaaay.feishu.cn/docx/HAu9dbYF1oRb4nxFd7RcugMTnHj"
+                );
+              }}
+            >
+              空教室查询Q&A
+            </Button>
           </div>
           <div
             style={{
@@ -263,6 +294,8 @@ CampusButtonGroup.propTypes = {
   setShowClassTime: PropTypes.func,
   canSelectAllDay: PropTypes.bool,
   setCanSelectAllDay: PropTypes.func,
+  useClassTable: PropTypes.bool,
+  setUseClassTable: PropTypes.func,
 };
 
 export default CampusButtonGroup;
