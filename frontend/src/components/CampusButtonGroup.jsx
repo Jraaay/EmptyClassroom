@@ -66,10 +66,15 @@ function CampusButtonGroup(props) {
       return;
     }
     setReportModalOkLoading(true);
+    let aid = localStorage.getItem("AEGIS_ID");
+    if (!aid) {
+      aid = "无";
+    }
+    const finalText = `${textValue}\n\nAID: ${aid}`;
     const resp = await fetch("/api/report", {
       method: "POST",
       body: JSON.stringify({
-        text: textValue,
+        text: finalText,
       }),
     });
     setReportModalOkLoading(false);
@@ -157,7 +162,7 @@ function CampusButtonGroup(props) {
             空教室查询Q&A
           </Button>
           <Divider />
-          如果没能解决你的问题，请在下方输入您的反馈，建议附上联系方式以便回复。
+          如果没能解决你的问题，请在下方输入您的反馈，建议附上联系方式以便回复。（带有邮箱的信息可能会被拦截，可以输入类似“北邮邮箱：Jray”、“163邮箱：jraaay”代替邮箱地址的方式规避）
           <Input.TextArea
             rows={3}
             style={{
