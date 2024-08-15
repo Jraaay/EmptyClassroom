@@ -268,10 +268,32 @@ func convert(campusConfig CampusConfig) {
 								fmt.Println(err.Error())
 							}
 							to, err := strconv.ParseInt(fromTo[1], 10, 32)
+							weekType := 0
 							if err != nil {
-								fmt.Println(err.Error())
+								if strings.HasSuffix(fromTo[1], "单") {
+									weekType = 1
+									fromTo[1] = strings.Replace(fromTo[1], "单", "", -1)
+									to, err = strconv.ParseInt(fromTo[1], 10, 32)
+									if err != nil {
+										fmt.Println(err.Error())
+									}
+								} else if strings.HasSuffix(fromTo[1], "双") {
+									weekType = 2
+									fromTo[1] = strings.Replace(fromTo[1], "双", "", -1)
+									if err != nil {
+										fmt.Println(err.Error())
+									}
+								} else {
+									fmt.Println(err.Error())
+								}
 							}
 							for week := from; week <= to; week++ {
+								if weekType == 1 && week%2 == 0 {
+									continue
+								}
+								if weekType == 2 && week%2 == 1 {
+									continue
+								}
 								classWeeks = append(classWeeks, int(week))
 							}
 						}
