@@ -15,6 +15,7 @@ import {
   SettingOutlined,
   GithubOutlined,
   HeartFilled,
+  GiftFilled,
 } from "@ant-design/icons";
 import "./CampusButtonGroup.css";
 
@@ -52,6 +53,7 @@ function CampusButtonGroup(props) {
 
   const [openReportModal, setOpenReportModal] = useState(false);
   const [openSettingModal, setOpenSettingModal] = useState(false);
+  const [openCoffeeModal, setOpenCoffeeModal] = useState(false);
   const [textValue, setTextValue] = useState("");
   const [reportModalOkLoading, setReportModalOkLoading] = useState(false);
 
@@ -282,6 +284,46 @@ function CampusButtonGroup(props) {
               size="small"
             >
               Github
+            </Button>
+          </div>
+          <div
+            style={{
+              lineHeight: "2em",
+            }}
+          >
+            买杯咖啡：
+            <Button
+              onClick={() => setOpenCoffeeModal(true)}
+              icon={<GiftFilled />}
+              size="small"
+            >
+              买杯咖啡
+            </Button>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        title={<div>
+          <HeartFilled style={{ color: "#ff4d4f", marginRight: "5px" }} />
+          买杯咖啡
+        </div>}
+        open={openCoffeeModal}
+        closable={true}
+        footer={null}
+        onCancel={() => {
+          setOpenCoffeeModal(false);
+        }}
+      >
+        <div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <img src="/reword_code.png" alt="coffee" style={{ width: "90%", maxWidth: "150px" }} />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "10px" }}>
+            微信扫码就可，感谢支持！
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "10px" }}>
+            <Button onClick={() => setOpenCoffeeModal(false)}>
+              关闭
             </Button>
           </div>
         </div>
